@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hola Santy</title>
+    <link rel="stylesheet" media="all" href="Santy1.css" />
+</head>
+<body>
+    <div class="container"> 
+        <h2>Reproductor de Audio</h2> 
+        <button id="playAudioButton">Reproducir Audio</button> 
+        <button id="pauseAudioButton">Pausar Audio</button> 
+        <button id="resumeAudioButton">Reanudar Audio</button> 
+        <div class="audio-controls"> 
+            <input type="range" id="audioProgressBar" class="progress-bar" value="0" max="100"> 
+        </div>
+        <p class="message" id="message"></p>
+        <h2>Introduce la Contraseña</h2> 
+        <input type="password" id="passwordInput1" placeholder="Contraseña para el primer botón"> 
+        <button id="protectedButton1" disabled>Acceder</button> 
+        <input type="password" id="passwordInput2" placeholder="Contraseña para el segundo botón"> 
+        <button id="protectedButton2" disabled>Acceder</button> 
+        <p class="message" id="message"></p> 
+    </div>
+    <audio id="audio" src="Código Morce.wav"></audio>
+    <script> 
+        const playAudioButton = document.getElementById('playAudioButton');
+        const pauseAudioButton = document.getElementById('pauseAudioButton');
+        const resumeAudioButton = document.getElementById('resumeAudioButton');
+        const audioProgressBar = document.getElementById('audioProgressBar');
+        const audio = document.getElementById('audio');
+
+        playAudioButton.addEventListener('click', function() {
+            audio.play(); 
+        });
+
+        pauseAudioButton.addEventListener('click', function() {
+            audio.pause(); 
+        });
+
+        resumeAudioButton.addEventListener('click', function() {
+            audio.play();
+        });
+
+        audio.addEventListener('timeupdate', function() {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            audioProgressBar.value = progress;
+        });
+
+        audioProgressBar.addEventListener('input', function() {
+            const newTime = (audioProgressBar.value / 100) * audio.duration;
+            audio.currentTime = newTime;
+        });
+
+        const passwordInput1 = document.getElementById('passwordInput1'); 
+        const protectedButton1 = document.getElementById('protectedButton1'); 
+        const passwordInput2 = document.getElementById('passwordInput2'); 
+        const protectedButton2 = document.getElementById('protectedButton2'); 
+        const message = document.getElementById('message'); 
+        
+        const correctPassword1 = 'electromagnetismomatutino'; 
+        const correctPassword2 = 'casarodantesos'; 
+        
+        passwordInput1.addEventListener('input', function() { 
+            if (passwordInput1.value === correctPassword1) { 
+                protectedButton1.disabled = false; 
+                message.textContent = ''; 
+            } else { 
+                protectedButton1.disabled = true; 
+                message.textContent = 'Contraseña incorrecta para el primer botón'; 
+            } 
+        });
+
+        passwordInput2.addEventListener('input', function() { 
+            if (passwordInput2.value === correctPassword2) { 
+                protectedButton2.disabled = false; 
+                message.textContent = ''; 
+            } else { 
+                protectedButton2.disabled = true; 
+                message.textContent = 'Contraseña incorrecta para el segundo botón'; 
+            } 
+        });
+
+        protectedButton1.addEventListener('click', function() { 
+            window.location.href = 'codificación.jpeg'; 
+        });
+
+        protectedButton2.addEventListener('click', function() { 
+            window.location.href = 'https://docs.google.com/document/d/1n3eJ0R0pQCHViT16tr6Unob8fplvUkR95kHRWF5aBKQ/edit?usp=sharing'; 
+        });
+        
+    </script>
+</html>
